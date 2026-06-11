@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>branday® — Xtressé hub</title>
+<link rel="stylesheet" href="assets/colors_and_type.css">
+<link rel="stylesheet" href="shared.css">
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.544.0/dist/umd/lucide.min.js"></script>
+<style>
+  body { background: var(--color-light); }
+
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 16px var(--gutter);
+    background: color-mix(in srgb, var(--color-light) 86%, transparent);
+    backdrop-filter: blur(12px); border-bottom: 1px solid var(--border);
+  }
+  .topbar .logo { height: 26px; }
+  .topbar-right { display: flex; align-items: center; gap: 14px; }
+
+  .stage { padding: var(--space-7) var(--gutter) var(--space-8); max-width: 1320px; margin-inline: auto; }
+  .intro-line { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: var(--space-6); }
+  .intro-line h1 { font-size: clamp(28px, 3vw, 40px); font-weight: var(--fw-regular); letter-spacing: var(--tracking-tight); line-height: 1.05; }
+  .intro-line p { color: var(--fg-muted); font-size: 16px; max-width: 40ch; }
+
+  /* ── bento grid ── */
+  .bento { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 196px; gap: 16px; }
+  .tile {
+    position: relative; overflow: hidden;
+    border-radius: var(--radius-lg); padding: 24px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    transition: transform var(--dur-comp) var(--easing-in), box-shadow var(--dur-comp) var(--easing-in), filter var(--dur-micro);
+    text-decoration: none; color: inherit;
+  }
+  a.tile:hover { transform: translateY(-3px); box-shadow: var(--shadow-3); }
+  .tile .t-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .tile .t-ico { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; }
+  .tile .t-ico svg { width: 21px; height: 21px; }
+  .tile .arrow { width: 34px; height: 34px; border-radius: 999px; display: grid; place-items: center; transition: transform var(--dur-micro) var(--easing-in); flex: none; }
+  a.tile:hover .arrow { transform: translate(2px, -2px); }
+  .tile .arrow svg { width: 17px; height: 17px; }
+  .tile .t-kicker { font-size: 11.5px; font-weight: var(--fw-semibold); letter-spacing: 0.05em; text-transform: uppercase; opacity: .72; }
+  .tile h3 { font-size: 23px; font-weight: var(--fw-semibold); line-height: 1.12; letter-spacing: -0.01em; margin-top: 5px; }
+  .tile p { font-size: 14px; line-height: 1.45; opacity: .8; margin-top: 7px; }
+  .tile .t-foot { display: flex; align-items: center; gap: 8px; }
+
+  /* tones */
+  .t-dark { background: var(--color-dark); color: var(--color-light); }
+  .t-dark .t-ico { background: color-mix(in srgb, var(--color-light) 12%, transparent); color: var(--color-sunny); }
+  .t-dark .arrow { background: var(--color-sunny); color: var(--color-dark); }
+  .t-sunny { background: var(--color-sunny); color: var(--color-dark); }
+  .t-sunny .t-ico { background: var(--color-dark); color: var(--color-sunny); }
+  .t-sunny .arrow { background: var(--color-dark); color: var(--color-light); }
+  .t-ooorange { background: var(--color-ooorange); color: var(--color-light); }
+  .t-ooorange .t-ico { background: color-mix(in srgb, #000 16%, transparent); color: var(--color-light); }
+  .t-ooorange .arrow { background: var(--color-light); color: var(--color-dark); }
+  .t-funsia { background: var(--color-funsia); color: var(--color-light); }
+  .t-funsia .t-ico { background: color-mix(in srgb, #000 16%, transparent); color: var(--color-light); }
+  .t-funsia .arrow { background: var(--color-light); color: var(--color-dark); }
+  .t-light { background: var(--color-light); color: var(--color-dark); box-shadow: inset 0 0 0 1px var(--border); }
+  .t-light .t-ico { background: var(--color-dark); color: var(--color-sunny); }
+  .t-light .arrow { background: var(--color-dark); color: var(--color-light); }
+
+  /* spans */
+  .c2 { grid-column: span 2; } .c3 { grid-column: span 3; } .c4 { grid-column: span 4; }
+  .r2 { grid-row: span 2; }
+
+  /* greeting */
+  .greet .eyebrow { color: color-mix(in srgb, var(--color-light) 62%, transparent); }
+  .greet h2 { font-size: clamp(26px, 2.6vw, 38px); font-weight: var(--fw-regular); letter-spacing: var(--tracking-tight); line-height: 1.04; }
+  .greet h2 .em { color: var(--color-sunny); }
+  .greet .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  /* WORK tile (priority, tall) */
+  .work-tile { padding: 0; }
+  .work-tile .wt-head { padding: 22px 24px 14px; display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+  .work-tile .wt-head h3 { font-size: 24px; font-weight: var(--fw-semibold); }
+  .work-tile .wt-head .t-kicker { color: var(--color-sunny); opacity: 1; }
+  .work-grid3 { flex: 1; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 10px; padding: 0 14px 14px; }
+  .wcell { position: relative; overflow: hidden; border-radius: var(--radius-md); background: var(--color-grey-200); text-decoration: none; }
+  .wcell:first-child { grid-row: span 2; }
+  .wcell img, .wcell video { width: 100%; height: 100%; object-fit: cover; transition: transform var(--dur-section) var(--easing-in); }
+  .wcell:hover img, .wcell:hover video { transform: scale(1.05); }
+  .wcell .cap { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 13px; background: linear-gradient(to top, rgba(30,30,30,.85), rgba(30,30,30,0) 58%); color: var(--color-light); }
+  .wcell .src { font-size: 10.5px; font-weight: var(--fw-semibold); letter-spacing: 0.03em; color: var(--color-sunny); display: flex; align-items: center; gap: 5px; }
+  .wcell .cttl { font-size: 15px; font-weight: var(--fw-semibold); line-height: 1.15; margin-top: 2px; }
+  .wcell .mini-ext { position: absolute; top: 11px; right: 11px; width: 27px; height: 27px; border-radius: 999px; background: color-mix(in srgb, var(--color-light) 90%, transparent); color: var(--color-dark); display: grid; place-items: center; opacity: 0; transition: opacity var(--dur-micro); }
+  .wcell:hover .mini-ext { opacity: 1; }
+  .wcell .mini-ext svg { width: 13px; height: 13px; }
+
+  /* who-we-are tile with stats */
+  .who h3 { font-size: 22px; }
+  .who .mini-stats { display: flex; gap: 26px; flex-wrap: wrap; }
+  .who .ms .n { font-size: 27px; line-height: 1; letter-spacing: -0.02em; font-weight: var(--fw-regular); }
+  .who .ms .l { font-size: 11.5px; color: var(--fg-muted); margin-top: 3px; max-width: 14ch; }
+
+  .soon-chip { font-size: 11px; font-weight: var(--fw-semibold); padding: 4px 10px; border-radius: 999px; background: color-mix(in srgb, #000 14%, transparent); }
+  .t-sunny .soon-chip, .t-light .soon-chip { background: color-mix(in srgb, var(--color-dark) 10%, transparent); }
+
+  @media (max-width: 980px) {
+    .bento { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 180px; }
+    .c3, .c4 { grid-column: span 2; }
+  }
+</style>
+</head>
+<body data-screen-label="dashboard-bento">
+
+  <header class="topbar">
+    <img class="logo" src="assets/logo-branday-dark.svg" alt="branday">
+    <div class="topbar-right">
+      <span class="client-chip"><span>prepared for</span> <b>Xtressé</b> <span class="avatar">X</span></span>
+    </div>
+  </header>
+
+  <main class="stage">
+    <div class="intro-line" data-screen-label="intro">
+      <h1>Your branday hub</h1>
+      <p>Everything you need to get started, in one tappable board. Pick a tile to dive in.</p>
+    </div>
+
+    <div class="bento">
+
+      <!-- greeting -->
+      <div class="tile t-dark c2 greet" data-screen-label="greeting">
+        <p class="eyebrow"><span class="dot"></span>welcome, Xtressé</p>
+        <div>
+          <h2>Let's make <span class="em">sparks happen</span> together.</h2>
+        </div>
+        <div class="actions">
+          <a href="https://form.asana.com/?k=S8wqV9Lt8ElHj8eEZsaouQ&d=1208117327359823" target="_blank" rel="noopener" class="btn btn-sunny btn-sm">Request an asset <i data-lucide="arrow-right"></i></a>
+          <a href="https://xtresse-portal.vercel.app/" target="_blank" rel="noopener" class="btn btn-ghost-light btn-sm">Client portal <i data-lucide="external-link"></i></a>
+        </div>
+      </div>
+
+      <!-- WORK (priority, tall) -->
+      <div class="tile t-dark c2 r2 work-tile" data-screen-label="work-examples">
+        <div class="wt-head">
+          <div><span class="t-kicker">examples of our work</span><h3>Work that shipped</h3></div>
+          <span class="pill" style="background:color-mix(in srgb,var(--color-light) 14%,transparent);color:var(--color-light)">reel + decks</span>
+        </div>
+        <div class="work-grid3">
+          <a class="wcell" href="https://figma.com/slides/2vtYfIwls4W1Tmm6e5WTbQ/Branday-Music?node-id=108-287" target="_blank" rel="noopener">
+            <video src="uploads/hero-editorial.MP4" autoplay muted loop playsinline preload="metadata"></video>
+            <span class="mini-ext"><i data-lucide="arrow-up-right"></i></span>
+            <div class="cap"><span class="src"><i data-lucide="play" style="width:12px;height:12px"></i> capabilities reel</span><span class="cttl">Branday Music</span></div>
+          </a>
+          <a class="wcell" href="https://www.figma.com/slides/6fUkKenjOmyFASCiFLA4p4/BRANDAY-CAPABILITIES-FOR-TAO-GROUP?node-id=14005-768" target="_blank" rel="noopener">
+            <img src="assets/work/music-4.png" alt="">
+            <span class="mini-ext"><i data-lucide="arrow-up-right"></i></span>
+            <div class="cap"><span class="src"><i data-lucide="figma" style="width:12px;height:12px"></i> Figma</span><span class="cttl">Branday capabilities</span></div>
+          </a>
+          <a class="wcell" href="https://drive.google.com/drive/folders/15zVWZzhdZJIu_ahoUuNa2ixMFGhgUx-S" target="_blank" rel="noopener">
+            <img src="assets/work/music-3.png" alt="">
+            <span class="mini-ext"><i data-lucide="arrow-up-right"></i></span>
+            <div class="cap"><span class="src"><i data-lucide="folder" style="width:12px;height:12px"></i> Drive</span><span class="cttl">More capabilities</span></div>
+          </a>
+        </div>
+      </div>
+
+      <!-- lead time overview -->
+      <a class="tile t-sunny" href="https://branday.com/q226_overview.html" target="_blank" rel="noopener" data-screen-label="leadtime-overview">
+        <div class="t-top"><div class="t-ico"><i data-lucide="calendar-clock"></i></div><div class="arrow"><i data-lucide="arrow-up-right"></i></div></div>
+        <div><span class="t-kicker">lead times</span><h3>Lead times overview</h3></div>
+      </a>
+
+      <!-- lead time interactive -->
+      <a class="tile t-ooorange" href="https://branday.com/q226_interactive.html" target="_blank" rel="noopener" data-screen-label="leadtime-interactive">
+        <div class="t-top"><div class="t-ico"><i data-lucide="sliders-horizontal"></i></div><div class="arrow"><i data-lucide="arrow-up-right"></i></div></div>
+        <div><span class="t-kicker">lead times</span><h3>Interactive planner</h3></div>
+      </a>
+
+      <!-- who we are -->
+      <div class="tile t-light c2 who" data-screen-label="who-we-are">
+        <div class="t-top"><span class="t-kicker" style="color:var(--color-ooorange)">who we are</span></div>
+        <h3>AI workspace + a human design concierge. On-brand assets in hours, not weeks.</h3>
+        <div class="mini-stats">
+          <div class="ms"><div class="n">50k+</div><div class="l">assets delivered</div></div>
+          <div class="ms"><div class="n">40%</div><div class="l">faster than a studio</div></div>
+          <div class="ms"><div class="n">12h</div><div class="l">minimum delivery</div></div>
+          <div class="ms"><div class="n">20+</div><div class="l">creative disciplines</div></div>
+        </div>
+      </div>
+
+      <!-- how we work -->
+      <a class="tile t-funsia" href="https://drive.google.com/file/d/1khRWAicmGwvRzRDlFrlbjbWzUoAbfy9H/view?usp=drive_link" target="_blank" rel="noopener" data-screen-label="how-we-work">
+        <div class="t-top"><div class="t-ico"><i data-lucide="route"></i></div><div class="arrow"><i data-lucide="arrow-up-right"></i></div></div>
+        <div><span class="t-kicker">process</span><h3>How we work together</h3></div>
+      </a>
+
+      <!-- services & pricing -->
+      <a class="tile t-dark" href="services-menu.html" target="_blank" rel="noopener" data-screen-label="pricing">
+        <div class="t-top"><div class="t-ico"><i data-lucide="receipt-text"></i></div><div class="arrow"><i data-lucide="arrow-up-right"></i></div></div>
+        <div><span class="t-kicker">services &amp; pricing</span><h3>Services menu</h3></div>
+      </a>
+
+      <!-- website -->
+      <a class="tile t-light c2" href="https://branday.com" target="_blank" rel="noopener" data-screen-label="website">
+        <div class="t-top"><div class="t-ico"><i data-lucide="globe"></i></div><div class="arrow"><i data-lucide="arrow-up-right"></i></div></div>
+        <div><span class="t-kicker">our site</span><h3>Explore branday.com</h3><p>The full story: platform, talent network and pricing.</p></div>
+      </a>
+
+      <!-- contact -->
+      <div class="tile t-sunny c2" data-screen-label="contact">
+        <div class="t-top"><div class="t-ico"><i data-lucide="mail"></i></div></div>
+        <div>
+          <span class="t-kicker">your account lead</span>
+          <h3>Jacqueline Roberts</h3>
+          <p style="opacity:1"><a href="mailto:jackie@branday.com" style="text-decoration:underline">jackie@branday.com</a> · we reply within a day</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+<script>lucide.createIcons();
+  document.querySelectorAll('video').forEach(v=>{ const p=v.play(); if(p&&p.catch) p.catch(()=>{}); });
+</script>
+</body>
+</html>

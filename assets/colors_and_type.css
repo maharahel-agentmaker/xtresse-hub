@@ -1,0 +1,274 @@
+/* ──────────────────────────────────────────────────────────────
+   BRANDAY DESIGN SYSTEM — Foundations
+   Source of truth: the VISUAL SYSTEM.fig file (Figma) + brand brief.
+   Where the brief and Figma disagree, this file follows Figma.
+   ────────────────────────────────────────────────────────────── */
+
+/* Fonts — self-hosted Cabin TTFs sit in /fonts. These are the brand's
+   official fonts. The full Cabin family (Regular 400, Medium 500, Bold
+   700) is self-hosted — no external font dependency. Cabin Condensed is
+   kept available for ultra-tight display headlines. */
+@font-face {
+  font-family: "Cabin";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/Cabin-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Cabin";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("fonts/Cabin-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Cabin";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("fonts/Cabin-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Cabin Condensed";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/Cabin_Condensed-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Cabin Condensed";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("fonts/Cabin_Condensed-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Cabin Condensed";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("fonts/Cabin_Condensed-Bold.ttf") format("truetype");
+}
+:root {
+  /* ─── COLOR TOKENS ─────────────────────────────────────────── */
+
+  /* Brand */
+  --color-sunny:    #FFC300;  /* primary accent, CTA, surfaces */
+  --color-ooorange: #FF6A00;  /* secondary accent, gradient stop */
+  --color-funsia:   #FF00E5;  /* magenta highlight, gradient stop */
+  --color-dark:     #1E1E1E;  /* primary text, dark surfaces, primary CTA */
+  --color-light:    #FFFBF5;  /* DEFAULT page background (warm off-white) */
+
+  /* Neutrals (sparingly used, lifted from Figma) */
+  --color-grey-300: #DDDDDD;  /* hairline borders */
+  --color-grey-200: #D9D9D9;  /* placeholder fills */
+  --color-grey-500: #8E8989;  /* muted text */
+
+  /* Brand-extended accents seen in the Figma but rare */
+  --color-violet:   #A100FF;
+  --color-blush:    #FFBEF8;
+  --color-citron:   #FFF600;
+  --color-coral:    #EB6A6A;
+  --color-amber:    #FFB800;
+  --color-rose:     #FFCECE;
+  --color-rose-deep:#FF006F;
+  --color-lavender: #9380FF;
+
+  /* ─── SEMANTIC COLOR ROLES ─────────────────────────────────── */
+  --bg:           var(--color-light);
+  --bg-dark:      var(--color-dark);
+  --fg:           var(--color-dark);
+  --fg-on-dark:   var(--color-light);
+  --fg-muted:     color-mix(in srgb, var(--color-dark) 60%, transparent);
+  --fg-subtle:    color-mix(in srgb, var(--color-dark) 40%, transparent);
+  --border:       color-mix(in srgb, var(--color-dark) 12%, transparent);
+  --border-strong:var(--color-dark);
+
+  /* CTA roles */
+  --cta-primary-bg:    var(--color-dark);
+  --cta-primary-fg:    var(--color-light);
+  --cta-secondary-bg:  var(--color-sunny);
+  --cta-secondary-fg:  var(--color-dark);
+  --cta-ghost-fg:      var(--color-dark);
+  --cta-ghost-border:  var(--color-dark);
+
+  /* ─── GRADIENTS ─────────────────────────────────────────────
+     The signature "spectrum" gradient runs yellow → orange → magenta.
+     In the Figma it is most often used vertical (top→bottom).
+     Use `--gradient-spectrum` for full-bleed surfaces and the orb. */
+  --gradient-spectrum:
+    linear-gradient(180deg, #FFC300 0%, #FF6A00 40%, #FF00E5 100%);
+  --gradient-spectrum-diag:
+    linear-gradient(135deg, #FF6A00 0%, #FFC300 45%, #FF00E5 100%);
+  --gradient-orb:           /* radial orb — soft, blurred glow */
+    radial-gradient(circle at 50% 60%, #FFE89A 0%, #FFC300 22%, #FF6A00 55%, rgba(255,106,0,0) 78%);
+  --gradient-orbit-stroke:  /* gradient used to fill the orbit-ring SVG */
+    linear-gradient(90deg, #FFC300 0%, #FF6A00 50%, #FF00E5 100%);
+  --gradient-sunset:        /* glow rising from the bottom of a dark surface */
+    radial-gradient(120% 80% at 50% 130%, #FFC300 0%, #FF6A00 25%, transparent 60%);
+
+  /* ─── RADII ─────────────────────────────────────────────────
+     The Figma uses 30px on every panel/card. Keep it large. */
+  --radius-sm:  8px;
+  --radius-md:  16px;
+  --radius-lg:  30px;   /* the brand default for cards & surfaces */
+  --radius-xl:  48px;
+  --radius-pill: 999px;
+
+  /* ─── ELEVATION / SHADOWS ───────────────────────────────────
+     Soft shadows only. Light-first; the Figma rarely uses shadows. */
+  --shadow-1: 0 1px 2px rgba(30,30,30,0.04);
+  --shadow-2: 0 8px 24px rgba(30,30,30,0.06);
+  --shadow-3: 0 24px 64px rgba(30,30,30,0.10);
+  --glow-orb: 0 0 120px 40px rgba(255,106,0,0.55),
+              0 0 240px 80px rgba(255,0,229,0.25);
+
+  /* ─── SPACING (4px base) ────────────────────────────────────*/
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+
+  /* ─── LAYOUT ────────────────────────────────────────────────*/
+  --content-max: 1280px;
+  --gutter: clamp(22px, 6vw, 96px);
+  --hit-min: 44px;
+
+  /* ─── MOTION ────────────────────────────────────────────────*/
+  --easing-in:   cubic-bezier(0.22, 1, 0.36, 1);
+  --easing-out:  cubic-bezier(0.4, 0, 1, 1);
+  --dur-micro:   200ms;
+  --dur-comp:    400ms;
+  --dur-section: 600ms;
+
+  /* ─── TYPOGRAPHY TOKENS ─────────────────────────────────────
+     Branday's display feel is BIG Cabin Regular set tight (-0.02em).
+     Cabin Condensed is kept available for ultra-tight headlines but
+     the Figma's display use is Cabin Regular at 200pt, line-height 0.85.
+     Body is Cabin Regular 16/1.5. */
+  --font-sans: "Cabin", "Helvetica Neue", Arial, sans-serif;
+  --font-condensed: "Cabin Condensed", "Cabin", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --fw-regular: 400;
+  --fw-medium:  500;
+  --fw-semibold:700; /* no dedicated SemiBold face; maps to self-hosted Bold */
+  --fw-bold:    700;
+
+  /* Type scale (use these as starting points — tighten per layout). */
+  --fs-display-xl: clamp(72px, 12vw, 200px);
+  --fs-display:    clamp(56px, 8vw, 120px);
+  --fs-h1:         clamp(40px, 6vw, 88px);
+  --fs-h2:         clamp(32px, 4vw, 60px);
+  --fs-h3:         clamp(22px, 2.2vw, 30px);
+  --fs-body-l:     18px;
+  --fs-body:       16px;
+  --fs-body-s:     14px;
+  --fs-caption:    12px;
+  --fs-button:     16px;
+
+  --lh-display: 0.95;
+  --lh-tight:   1.05;
+  --lh-snug:    1.2;
+  --lh-body:    1.5;
+  --lh-loose:   1.7;
+
+  --tracking-display: -0.025em;
+  --tracking-tight:   -0.015em;
+  --tracking-normal:   0em;
+  --tracking-caption:  0.08em;
+}
+
+/* ─── SEMANTIC TYPE CLASSES ──────────────────────────────────
+   Mirror these onto your headings/paragraphs OR use the classes
+   directly. They embody the brand vibe: tight tracking, low
+   line-height for display, lowercase friendly. */
+
+html, body { background: var(--bg); color: var(--fg); font-family: var(--font-sans); }
+body { font-size: var(--fs-body); line-height: var(--lh-body); font-weight: var(--fw-regular); }
+
+.display-xl, .display, h1.display, .hero-headline {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-display-xl);
+  line-height: var(--lh-display);
+  letter-spacing: var(--tracking-display);
+  text-wrap: balance;
+}
+h1, .h1 {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-h1);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+  text-wrap: balance;
+}
+h2, .h2 {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+  text-wrap: balance;
+}
+h3, .h3 {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-h3);
+  line-height: var(--lh-snug);
+  letter-spacing: 0;
+}
+p, .body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  max-width: 70ch;
+  text-wrap: pretty;
+}
+.body-l { font-size: var(--fs-body-l); line-height: var(--lh-body); }
+.body-s { font-size: var(--fs-body-s); line-height: var(--lh-body); }
+/* Captions and eyebrows are sentence case or lowercase — NEVER uppercase.
+   The brand reserves capitals only for the registered mark (®) and the
+   start of a sentence in long-form prose. */
+.caption {
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+  letter-spacing: 0;
+  line-height: 1.4;
+  color: var(--color-grey-500);
+}
+.eyebrow {
+  font-size: 13px;
+  font-weight: var(--fw-medium);
+  letter-spacing: 0;
+}
+
+/* Reusable utility — paint text with the brand spectrum gradient.
+   Hold to display / accent runs; not for body. */
+.text-spectrum {
+  background: var(--gradient-spectrum);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Focus ring — Sunny outline, 2px offset, as the brief specifies. */
+:where(button, a, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-sunny);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

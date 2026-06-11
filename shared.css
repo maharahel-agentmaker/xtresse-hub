@@ -1,0 +1,81 @@
+/* ───────────────────────────────────────────────
+   Branday client dashboard — shared base
+   Tokens come from assets/colors_and_type.css
+   ─────────────────────────────────────────────── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+body { font-family: var(--font-sans); background: var(--bg); color: var(--fg); }
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+.wrap { width: 100%; max-width: var(--content-max); margin-inline: auto; padding-inline: var(--gutter); }
+
+/* eyebrow */
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 13px; font-weight: var(--fw-medium); letter-spacing: 0;
+  color: var(--fg-muted);
+}
+.eyebrow .dot { width: 7px; height: 7px; border-radius: 999px; background: var(--color-ooorange); flex: none; }
+
+/* buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+  font-size: var(--fs-button); font-weight: var(--fw-semibold); letter-spacing: 0.01em;
+  padding: 13px 22px; border-radius: var(--radius-pill);
+  transition: transform var(--dur-micro) var(--easing-in),
+              background var(--dur-micro), color var(--dur-micro), opacity var(--dur-micro);
+  white-space: nowrap;
+}
+.btn svg { width: 18px; height: 18px; }
+.btn:active { transform: scale(0.98); }
+.btn-primary { background: var(--cta-primary-bg); color: var(--cta-primary-fg); }
+.btn-primary:hover { background: #0c0c0c; }
+.btn-sunny { background: var(--color-sunny); color: var(--color-dark); }
+.btn-sunny:hover { filter: brightness(0.96); }
+.btn-ghost { box-shadow: inset 0 0 0 1.5px var(--cta-ghost-border); color: var(--cta-ghost-fg); }
+.btn-ghost:hover { background: var(--color-dark); color: var(--color-light); }
+.btn-ghost-light { box-shadow: inset 0 0 0 1.5px color-mix(in srgb, var(--color-light) 32%, transparent); color: var(--color-light); }
+.btn-ghost-light:hover { background: var(--color-light); color: var(--color-dark); }
+.btn-sm { padding: 9px 16px; font-size: 14px; }
+
+/* the open-arrow micro button used on cards */
+.open-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 14px; font-weight: var(--fw-semibold); color: var(--fg);
+  padding: 8px 14px; border-radius: var(--radius-pill);
+  box-shadow: inset 0 0 0 1.5px var(--border-strong);
+  transition: background var(--dur-micro), color var(--dur-micro);
+}
+.open-btn svg { width: 15px; height: 15px; transition: transform var(--dur-micro) var(--easing-in); }
+.open-btn:hover { background: var(--color-dark); color: var(--color-light); }
+.open-btn:hover svg { transform: translate(2px, -2px); }
+
+/* small pill / tag */
+.pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: var(--fw-medium);
+  padding: 5px 11px; border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--color-dark) 6%, transparent);
+  color: var(--fg-muted);
+}
+
+/* personalized header chip */
+.client-chip {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 6px 6px 6px 14px; border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--color-dark) 5%, transparent);
+  font-size: 13px; color: var(--fg-muted);
+}
+.client-chip b { color: var(--fg); font-weight: var(--fw-semibold); }
+.client-chip .avatar {
+  width: 30px; height: 30px; border-radius: 999px;
+  background: var(--gradient-spectrum-diag); color: #fff;
+  display: grid; place-items: center; font-size: 13px; font-weight: var(--fw-bold);
+}
+
+/* spark mark */
+.spark { display: inline-block; }
+
+/* reduced motion handled by colors_and_type.css */
