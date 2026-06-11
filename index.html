@@ -71,7 +71,10 @@
   .greet .eyebrow { color: color-mix(in srgb, var(--color-light) 62%, transparent); }
   .greet h2 { font-size: clamp(26px, 2.6vw, 38px); font-weight: var(--fw-regular); letter-spacing: var(--tracking-tight); line-height: 1.04; }
   .greet h2 .em { color: var(--color-sunny); }
-  .greet .actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .greet .actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .portal-pair { display: inline-flex; align-items: center; gap: 6px; }
+  .key-btn { width: 38px; height: 38px; padding: 0; border-radius: 999px; flex: none; }
+  .key-btn svg { width: 17px; height: 17px; margin: 0; }
 
   /* WORK tile (priority, tall) */
   .work-tile { padding: 0; }
@@ -130,7 +133,10 @@
         </div>
         <div class="actions">
           <a href="https://form.asana.com/?k=S8wqV9Lt8ElHj8eEZsaouQ&d=1208117327359823" target="_blank" rel="noopener" class="btn btn-sunny btn-sm">Request an asset <i data-lucide="arrow-right"></i></a>
-          <a href="https://xtresse-portal.vercel.app/" target="_blank" rel="noopener" class="btn btn-ghost-light btn-sm">Client portal <i data-lucide="external-link"></i></a>
+          <span class="portal-pair">
+            <a href="https://xtresse-portal.vercel.app/" target="_blank" rel="noopener" class="btn btn-ghost-light btn-sm">Client portal <i data-lucide="external-link"></i></a>
+            <a href="https://share.1password.com/s#1KA0HmmrIKpsUfp6U3qQ7t827soBEtabZ7aT0iiHaho" target="_blank" rel="noopener" class="btn btn-ghost-light btn-sm key-btn" title="Get your portal login" aria-label="Get your portal login"><i data-lucide="key-round"></i></a>
+          </span>
         </div>
       </div>
 
